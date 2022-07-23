@@ -1,6 +1,22 @@
 var CASE_LOWER = 0;var CASE_UPPER = 1;
-function empty( mixed_var ) {
-	return ( mixed_var === "" || mixed_var === 0   || mixed_var === "0" || mixed_var === null  || mixed_var === false  ||  ( is_array(mixed_var) && mixed_var.length === 0 ) );
+function empty (mixedValue){
+  switch (typeof mixedValue) {
+    case 'undefined':
+      return true;
+    case 'object':
+      for(val in mixedValue)return false;
+      return true;
+    case 'string':
+      return (mixedValue.length==0?true:false);
+    case 'boolean':
+      return false;
+    case 'number':
+      return isNaN(mixedValue);
+    case 'function':
+      return false;
+    default:
+      console.log('nothing');
+  }
 }
 function abs( mixed_number )  {
 	return ( ( isNaN ( mixed_number ) ) ? 0 : Math.abs ( mixed_number ) );
